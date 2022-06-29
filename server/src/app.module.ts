@@ -3,9 +3,11 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
-import { HelloResolver } from './Author/hello.resolver';
+import { HelloResolver } from './Users/hello.resolver';
 
-import { CatsController } from './abc.controller';
+import { UsersController } from './controller/users.controller';
+import { AppController } from './controller/app.controller';
+import { ServiceB } from './service/app.childService';
 
 @Module({
   imports: [
@@ -14,12 +16,12 @@ import { CatsController } from './abc.controller';
       typePaths: ['./**/*.graphql'],
       definitions: {
         path: join(process.cwd(), 'src/graphql.ts'),
-        outputAs: 'class'
+        outputAs: 'class',
       },
       debug: false,
     }),
   ],
-  controllers: [CatsController],
-  providers: [HelloResolver],
+  controllers: [AppController, UsersController],
+  providers: [HelloResolver, ServiceB],
 })
 export class AppModule {}

@@ -31,7 +31,8 @@ import { validationSchema } from './config/validationSchema';
     UsersModule,
     ConfigModule.forRoot({
       envFilePath: [`${__dirname}/config/env/.${process.env.NODE_ENV}.env`],
-      // emailConfig를 저장합니다.
+      // envFilePath: [`./src/config/env/.${process.env.NODE_ENV}.env`],
+      // load 속성을 통해 앞에서 구성해둔 ConfigFactory를 지정합니다.
       load: [emailConfig],
       // 전역 모듈로 동작합니다.
       isGlobal: true,

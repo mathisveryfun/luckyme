@@ -5,6 +5,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigModule } from '@nestjs/config';
 import { join } from 'path';
 import { HelloResolver } from './Users/hello.resolver';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { UsersController } from './Userss/users.controller';
 import { AppController } from './controller/app.controller';
@@ -39,8 +40,9 @@ import { validationSchema } from './config/validationSchema';
       // 환경변수의 유효성을 검사합니다.
       validationSchema,
     }),
+    TypeOrmModule.forRoot(),
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [HelloResolver],
 })
 export class AppModule {}

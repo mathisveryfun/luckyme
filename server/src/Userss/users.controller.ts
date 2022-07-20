@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, ParseIntPipe } from '@nestjs/common';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UserLoginDto } from '../dto/user-login.dto';
 import { VerifyEmailDto } from '../dto/verify-email.dto';
 import { UserInfo } from '../UserInfo';
 import { UsersService } from './users.service';
+import { ValidationPipe } from '../validation.pipe'
 
 @Controller('users')
 export class UsersController {
@@ -30,7 +31,7 @@ export class UsersController {
   }
 
   @Get('/:id')
-  async getUserInfo(@Param('id') userId: string): Promise<UserInfo> {
+  async getUserInfo(@Param('id', ValidationPipe) userId: string): Promise<UserInfo> {
     return await this.usersService.getUserInfo(userId);
   }
 }
